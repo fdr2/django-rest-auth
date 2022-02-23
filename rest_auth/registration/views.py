@@ -1,6 +1,10 @@
+from django import VERSION
 from django.conf import settings
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.utils.translation import ugettext_lazy as _
+else:
+    from django.utils.translation import gettext_lazy as _
 from django.views.decorators.debug import sensitive_post_parameters
 
 from rest_framework.views import APIView

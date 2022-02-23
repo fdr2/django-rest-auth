@@ -1,5 +1,9 @@
+from django import VERSION
 from django.views.generic import TemplateView
-from django.conf.urls import url
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.conf.urls import url
+else:
+    from django.urls import re_path as url
 
 from .views import RegisterView, VerifyEmailView
 

@@ -1,8 +1,12 @@
+from django import VERSION
 from django.test import TestCase, override_settings
 from django.contrib.auth import get_user_model
 from django.core import mail
 from django.conf import settings
-from django.utils.encoding import force_text
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.utils.encoding import force_text
+else:
+    from django.utils.encoding import force_str as force_text
 
 from allauth.account import app_settings as account_app_settings
 from rest_framework import status

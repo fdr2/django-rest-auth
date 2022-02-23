@@ -1,3 +1,4 @@
+from django import VERSION
 from django.contrib.auth import (
     login as django_login,
     logout as django_logout
@@ -6,7 +7,10 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.utils.translation import ugettext_lazy as _
+else:
+    from django.utils.translation import gettext_lazy as _
 from django.views.decorators.debug import sensitive_post_parameters
 
 from rest_framework import status

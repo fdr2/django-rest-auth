@@ -1,8 +1,12 @@
 import json
 
+from django import VERSION
 from django.conf import settings
 from django.test.client import Client, MULTIPART_CONTENT
-from django.utils.encoding import force_text
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.utils.encoding import force_text
+else:
+    from django.utils.encoding import force_str as force_text
 
 from rest_framework import status
 from rest_framework import permissions

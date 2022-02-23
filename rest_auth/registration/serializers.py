@@ -1,5 +1,9 @@
+from django import VERSION
 from django.http import HttpRequest
-from django.utils.translation import ugettext_lazy as _
+if float('.'.join(map(str, VERSION[:2]))) < 4:
+    from django.utils.translation import ugettext_lazy as _
+else:
+    from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 
 try:
